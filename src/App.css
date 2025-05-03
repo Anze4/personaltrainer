@@ -28,6 +28,26 @@
   color: #61dafb;
 }
 
+.edit-btn, .delete-btn {
+  margin: 0 4px;
+  padding: 4px 8px;
+  font-size: 0.9em;
+}
+
+.delete-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.edit-btn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
