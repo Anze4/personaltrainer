@@ -4,8 +4,7 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import AddCustomer from './AddCustomer'; 
 import EditCustomer from './EditCustomer';
-
-
+import { CSVLink } from 'react-csv';
 
 import {
   ModuleRegistry,
@@ -30,13 +29,12 @@ const CustomerList = () => {
   const [customers, setCustomers] = useState([]);
   const [editingCustomer, setEditingCustomer] = useState(null);
 
-
   const fetchData = () => {
     fetch('https://customer-rest-service-frontend-personaltrainer.2.rahtiapp.fi/api/customers')
       .then(response => response.json())
       .then(data => setCustomers(data._embedded.customers));
   };
-  
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -75,8 +73,6 @@ const CustomerList = () => {
       .catch(err => console.error(err));
     }
   };
-  
-  
 
   const columns = [
     { headerName: 'Etunimi', field: 'firstname', sortable: true, filter: true },
@@ -97,13 +93,24 @@ const CustomerList = () => {
       )
     }
   ];
-  
+
+  const csvData = customers.map(c => ({
+    Etunimi: c.firstname,
+    Sukunimi: c.lastname,
+    Osoite: c.streetaddress,
+    Postinumero: c.postcode,
+    Kaupunki: c.city,
+    Sähköposti: c.email,
+    Puhelin: c.phone
+  }));
 
   return (
-    <div className="ag-theme-alpine" style={{ height: 600 }}>
-        <AddCustomer fetchData={fetchData} />
+    <div style={{ padding: '20px' }}>
+      <h2>Asiakaslista</h2>
 
-        {editingCustomer && (
+      <AddCustomer fetchData={fetchData} />
+
+      {editingCustomer && (
         <EditCustomer
           customer={editingCustomer}
           updateCustomer={updateCustomer}
@@ -111,18 +118,31 @@ const CustomerList = () => {
         />
       )}
 
-      <AgGridReact
-      theme = "legacy"
-        rowData={customers}
-        columnDefs={columns}
-        pagination={true}
-        paginationPageSize={100}
-        rowModelType="clientSide"
-      />
+      <CSVLink
+        data={csvData}
+        filename="asiakkaat.csv"
+        className="btn btn-primary"
+        style={{ marginBottom: '10px', display: 'inline-block' }}
+      >
+        Vie CSV
+      </CSVLink>
+
+      <div className="ag-theme-alpine" style={{ height: 600 }}>
+        <AgGridReact
+        theme = "legacy"
+          rowData={customers}
+          columnDefs={columns}
+          pagination={true}
+          paginationPageSize={100}
+          rowModelType="clientSide"
+        />
+      </div>
     </div>
   );
 };
 
 export default CustomerList;
+
+
 
 

@@ -8,6 +8,7 @@ import './App.css';
 
 
 
+
 function App() {
   return (
     <Router>
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<CustomerList />} />
         <Route path="/trainings" element={<TrainingList />} />
         <Route path="/customers/:id" element={<CustomerDetails />} />
+      
 
       </Routes>
     </Router>

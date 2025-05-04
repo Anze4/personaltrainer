@@ -5,6 +5,10 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@fullcalendar/daygrid": "^5.11.3",
+    "@fullcalendar/interaction": "^5.11.3",
+    "@fullcalendar/react": "^5.11.3",
+    "@fullcalendar/timegrid": "^5.11.3",
     "@mui/icons-material": "^7.0.2",
     "@mui/material": "^7.0.2",
     "@mui/x-date-pickers": "^8.2.0",
@@ -17,6 +21,7 @@
     "axios": "^1.9.0",
     "dayjs": "^1.11.13",
     "react": "^19.1.0",
+    "react-csv": "^2.2.2",
     "react-datepicker": "^8.3.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.5.3",
